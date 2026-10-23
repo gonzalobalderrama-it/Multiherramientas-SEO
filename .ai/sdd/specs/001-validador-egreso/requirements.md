@@ -1,6 +1,6 @@
 # Feature: 001 — Validador de Año de Egreso para Seminario
 
-> Status: Draft  
+> Status: Approved  
 > Source: Solicitud directa del Asistente Administrativo de SEI y migración mejorada de [Verificador seminario.html](file:///c:/Users/GonzaloNicolasBalder/OneDrive%20-%20Church%20of%20Jesus%20Christ/Aplicaciones/Multiherramientas%20SEI/Verificador%20seminario.html)  
 > Last Updated: 2026-10-23  
 

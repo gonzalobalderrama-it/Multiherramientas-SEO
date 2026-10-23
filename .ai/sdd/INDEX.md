@@ -43,7 +43,7 @@
 
 | ID | Feature | Estado | Requisitos | Diseño | Tareas | Review | Próxima Acción |
 |----|---------|--------|------------|--------|--------|--------|----------------|
-| 001 | 001-validador-egreso | requirements:draft | draft | no | no | no | Revisión y aprobación humana de requisitos |
+| 001 | 001-validador-egreso | design:draft | approved | draft | no | no | Revisión y aprobación del diseño técnico con `/sdd-tasks` |
 
 ## Handoff Output
 
