@@ -36,13 +36,14 @@
 
 | Campo | Valor | Notas |
 |-------|-------|-------|
-| Next Feature ID | 001 | Próximo feature disponible para especificación |
+| Next Feature ID | 002 | Próximo feature disponible para especificación |
 | Numbering Issues | none | |
 
 ## Specs
 
 | ID | Feature | Estado | Requisitos | Diseño | Tareas | Review | Próxima Acción |
 |----|---------|--------|------------|--------|--------|--------|----------------|
+| 001 | 001-validador-egreso | requirements:draft | draft | no | no | no | Revisión y aprobación humana de requisitos |
 
 ## Handoff Output
 
@@ -57,10 +58,10 @@
 
 ## Blocked / Attention Needed
 
-- Ninguno. El workspace está listo para iniciar la primera fase.
+- Ninguno. El feature 001 está en borrador de requisitos esperando aprobación.
 
 ## Next Actions
 
-- [ ] Explorar y refinar las primeras ideas de herramientas con `/sdd-idea`
-- [ ] O mapear el roadmap inicial de herramientas con `/sdd-plan`
-- [ ] O iniciar la especificación técnica de la base/shell de la extensión con `/sdd-prd`
+- [ ] Revisar y aprobar requisitos de `001-validador-egreso`
+- [ ] Avanzar al diseño técnico con `/sdd-spec` una vez aprobado
+
