@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Ingreso - Seminario de Religión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <header class="bg-blue-900 text-white shadow-md py-6 px-4">
+        <div class="max-w-2xl mx-auto text-center">
+            <span class="bg-blue-800 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">S&I Área SAs</span>
+            <h1 class="text-2xl md:text-3xl font-bold mt-2">Seminario de Religión</h1>
+            <p class="text-blue-200 text-sm mt-1">Calculadora de Elegibilidad por Edad</p>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-xl w-full mx-auto p-4 md:p-6 my-6">
+        <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8">
+            
+            <div class="flex items-center justify-between bg-slate-100 p-3 rounded-xl mb-6">
+                <span class="text-xs font-medium text-slate-500 uppercase tracking-wide">Ciclo Lectivo Actual</span>
+                <span id="current-year-display" class="font-bold text-blue-900 text-lg">---</span>
+            </div>
+
+            <!-- FORM -->
+            <form id="calculator-form" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Fecha de Nacimiento del Alumno</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <!-- Day Input -->
+                        <div>
+                            <label for="birth-day" class="block text-xs text-slate-500 mb-1">Día</label>
+                            <select id="birth-day" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-slate-800 font-medium focus:ring-2 focus:ring-blue-600 focus:outline-none transition">
+                                <option value="">Día</option>
+                            </select>
+                        </div>
+                        <!-- Month Input -->
+                        <div>
+                            <label for="birth-month" class="block text-xs text-slate-500 mb-1">Mes</label>
+                            <select id="birth-month" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-slate-800 font-medium focus:ring-2 focus:ring-blue-600 focus:outline-none transition">
+                                <option value="">Mes</option>
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </div>
+                        <!-- Year Input -->
+                        <div>
+                            <label for="birth-year" class="block text-xs text-slate-500 mb-1">Año</label>
+                            <select id="birth-year" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-slate-800 font-medium focus:ring-2 focus:ring-blue-600 focus:outline-none transition">
+                                <option value="">Año</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-3.5 px-4 rounded-xl shadow-lg shadow-blue-600/20 transition-all duration-200 transform active:scale-[0.99]">
+                    Calcular Elegibilidad y Graduación
+                </button>
+            </form>
+
+            <!-- RESULT CONTAINER -->
+            <div id="result-container" class="mt-8 hidden">
+                <div id="result-card" class="p-5 rounded-2xl border transition-all duration-300">
+                    <div class="flex items-start space-x-3">
+                        <div id="result-icon" class="text-2xl mt-0.5"></div>
+                        <div class="flex-1">
+                            <h3 id="result-title" class="font-bold text-base"></h3>
+                            <div id="result-message" class="text-sm mt-1 leading-relaxed"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rules reference info -->
+            <div class="mt-8 pt-6 border-t border-slate-100 text-xs text-slate-500 space-y-1">
+                <p class="font-medium text-slate-600">Reglas de Ingreso y Cursado (Seminario Mendoza):</p>
+                <p>• <strong>Corte estricto al 1 de Julio:</strong> El alumno debe tener entre 14 y 17 años al 30 de junio (antes del 1 de julio) del año de ingreso.</p>
+                <p>• <strong>Mínimo de Ingreso:</strong> Si cumple los 14 años del 1 de julio en adelante, ingresa en el ciclo del año siguiente.</p>
+                <p>• <strong>Límite Superior:</strong> Si cumple los 18 años antes del 1 de julio de un determinado año, no entra por haber superado la edad máxima reglamentaria.</p>
+                <p>• <strong>Duración:</strong> Programa de 4 años lectivos de cursado continuo.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-6 text-xs text-slate-400">
+        <p>Seminarios e Institutos de Religión • Área SAS</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentYear = new Date().getFullYear();
+            document.getElementById('current-year-display').textContent = currentYear;
+
+            // Populate Days (1-31)
+            const daySelect = document.getElementById('birth-day');
+            for (let d = 1; d <= 31; d++) {
+                const opt = document.createElement('option');
+                opt.value = d;
+                opt.textContent = d < 10 ? '0' + d : d;
+                daySelect.appendChild(opt);
+            }
+
+            // Populate Years (CurrentYear - 20 to CurrentYear - 11)
+            const yearSelect = document.getElementById('birth-year');
+            const minYear = currentYear - 20;
+            const maxYear = currentYear - 11;
+            for (let y = maxYear; y >= minYear; y--) {
+                const opt = document.createElement('option');
+                opt.value = y;
+                opt.textContent = y;
+                yearSelect.appendChild(opt);
+            }
+
+            // Form Submit handler
+            document.getElementById('calculator-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                processCalculation();
+            });
+
+            // Instant calculation trigger on dropdown change
+            ['birth-day', 'birth-month', 'birth-year'].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    const day = document.getElementById('birth-day').value;
+                    const month = document.getElementById('birth-month').value;
+                    const year = document.getElementById('birth-year').value;
+                    if (day && month && year) {
+                        processCalculation();
+                    } else {
+                        document.getElementById('result-container').classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Función auxiliar para determinar si nació antes del 1 de julio (hasta el 30 de junio inclusive)
+        function isBornBeforeJuly1(day, month) {
+            if (month < 7) return true;  // Meses Enero a Junio (1 a 6)
+            return false;                // Julio (7) en adelante es a partir del 1 de julio
+        }
+
+        function processCalculation() {
+            const day = parseInt(document.getElementById('birth-day').value);
+            const month = parseInt(document.getElementById('birth-month').value);
+            const year = parseInt(document.getElementById('birth-year').value);
+
+            if (!day || !month || !year) return;
+
+            const today = new Date();
+            const currentYear = today.getFullYear();
+
+            // 1. Calcular Edad Actual Exacta (años, meses y días cumplidos al día de hoy)
+            let currentAge = currentYear - year;
+            const currentMonth = today.getMonth() + 1; // 1-12
+            const currentDay = today.getDate();
+
+            if (currentMonth < month || (currentMonth === month && currentDay < day)) {
+                currentAge--;
+            }
+
+            // Nació antes del 1 de julio (hasta el 30 de junio inclusive)
+            const bornBeforeJuly = isBornBeforeJuly1(day, month);
+
+            // 2. Determinar Año de Ingreso Oficial (Año 1 de Seminario)
+            // Regla: Tener 14 años cumplidos ANTES del 1 de Julio.
+            // Si nació antes del 1 de Julio (hasta 30 de junio), cumple 14 antes del 1 de Julio en (AñoNacimiento + 14).
+            // Si nació del 1 de Julio en adelante, cumple los 14 el 1 de julio o después, por lo que ingresa al ciclo siguiente (AñoNacimiento + 15).
+            let intakeYear = bornBeforeJuly ? (year + 14) : (year + 15);
+
+            // 3. Duración del Programa: 4 años lectivos exactos (Año 1, 2, 3 y 4 de egreso)
+            // Ejemplo: Ingresa en 2026 -> cursa 2026, 2027, 2028, 2029 (se gradúa al finalizar 2029)
+            let graduationYear = intakeYear + 3;
+
+            // Edad cumplida al momento del ingreso (al 1 de julio del año de ingreso tiene 14)
+            let ageAtIntake = 14; 
+
+            // Edad al egresar (al final del 4° año)
+            let ageAtGraduation = bornBeforeJuly ? (graduationYear - year) : (graduationYear - year);
+
+            // 4. Verificación de elegibilidad para el ciclo lectivo actual
+            let isEligible = false;
+            let title = "";
+            let message = "";
+
+            if (currentYear > graduationYear) {
+                // Ya pasó el periodo de 4 años de cursado de Seminario
+                isEligible = false;
+                title = "No entra en el programa (Fuera de edad)";
+                message = `El alumno ya superó el rango de edad para Seminario. Su ciclo de cursado de 4 años correspondió al periodo <strong>${intakeYear} — ${graduationYear}</strong>.`;
+            } else if (currentYear < intakeYear) {
+                // Todavía no cumple 14 años antes del 1 de julio del año actual
+                isEligible = false;
+                title = "No entra este año (Aún es muy joven)";
+                message = `No cumple 14 años antes del 1 de julio de ${currentYear}. Podrá ingresar oficialmente al Seminario en el año lectivo <strong>${intakeYear}</strong>.`;
+            } else {
+                // Está dentro del ciclo lectivo activo
+                // Verificar límite superior de edad: Cumplir 18 años ANTES del 1 de julio del año lectivo lo deja fuera.
+                // Si nació antes del 1 de julio, en (year + 18) cumple 18 antes del 1 de julio.
+                let age18Year = bornBeforeJuly ? (year + 18) : (year + 19);
+
+                if (currentYear >= age18Year) {
+                    isEligible = false;
+                    title = "No entra en el programa (Exceso de edad)";
+                    message = `Cumplió o cumple 18 años antes del 1 de julio de este ciclo lectivo, por lo que excede el límite de edad para ingresar o continuar en Seminario.`;
+                } else {
+                    isEligible = true;
+                    title = "¡Sí entra en el programa!";
+                    let currentGrade = (currentYear - intakeYear) + 1;
+                    message = `El alumno cumple con los requisitos (tiene entre 14 y 17 años al 1 de julio). Actualmente le corresponde cursar el <strong>${currentGrade}° Año</strong> de Seminario.`;
+                }
+            }
+
+            displayResult(isEligible, title, message, currentAge, intakeYear, graduationYear, ageAtIntake, ageAtGraduation);
+        }
+
+        function displayResult(isEligible, title, message, currentAge, intakeYear, graduationYear, ageAtIntake, ageAtGraduation) {
+            const container = document.getElementById('result-container');
+            const card = document.getElementById('result-card');
+            const icon = document.getElementById('result-icon');
+            const titleEl = document.getElementById('result-title');
+            const msgEl = document.getElementById('result-message');
+
+            container.classList.remove('hidden');
+
+            let html = `
+                <div class="mb-3 pb-2 border-b border-slate-200/60 flex justify-between items-center flex-wrap gap-2">
+                    <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Edad Actual del Alumno:</span>
+                    <span class="bg-blue-100 text-blue-900 font-bold px-3 py-1 rounded-full text-sm">🎂 ${currentAge} años cumplidos</span>
+                </div>
+                <div class="text-sm leading-relaxed">${message}</div>
+            `;
+
+            if (isEligible) {
+                card.className = "p-5 rounded-2xl border bg-emerald-50 border-emerald-200 text-emerald-900 transition-all duration-300";
+                icon.textContent = "✅";
+                titleEl.className = "font-bold text-base text-emerald-900";
+
+                html += `
+                    <div class="mt-4 pt-3 border-t border-emerald-200/80 space-y-2">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-medium text-emerald-800">📅 Año de Ingreso (14 años al 1/Jul):</span>
+                            <span class="font-bold text-emerald-950">${intakeYear}</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-semibold text-emerald-900">🎓 Año de Egreso Graduación:</span>
+                            <span class="bg-emerald-600 text-white font-bold px-3 py-1 rounded-lg text-base shadow-sm">${graduationYear}</span>
+                        </div>
+                        <p class="text-xs text-emerald-700 mt-1">
+                            • Edad al ingresar: <strong>14 años</strong>.<br>
+                            • Edad estimativa al egresar (${graduationYear}): <strong>${ageAtGraduation} años</strong>.
+                        </p>
+                    </div>
+                `;
+            } else {
+                card.className = "p-5 rounded-2xl border bg-rose-50 border-rose-200 text-rose-900 transition-all duration-300";
+                icon.textContent = "❌";
+                titleEl.className = "font-bold text-base text-rose-900";
+                
+                html += `
+                    <div class="mt-3 pt-2 border-t border-rose-200/60 text-xs text-rose-800 space-y-1">
+                        <p>• Cohorte de cursado teórico: <strong>${intakeYear} — ${graduationYear}</strong>.</p>
+                        <p>• Edad estimativa de graduación de su cohorte: <strong>${ageAtGraduation} años</strong>.</p>
+                    </div>
+                `;
+            }
+
+            titleEl.textContent = title;
+            msgEl.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
