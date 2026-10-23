@@ -43,7 +43,7 @@
 
 | ID | Feature | Estado | Requisitos | Diseño | Tareas | Review | Próxima Acción |
 |----|---------|--------|------------|--------|--------|--------|----------------|
-| 001 | 001-validador-egreso | design:draft | approved | draft | no | no | Revisión y aprobación del diseño técnico con `/sdd-tasks` |
+| 001 | 001-validador-egreso | tasks:draft | approved | approved | draft | no | Revisión y aprobación del plan de tareas para iniciar ejecución |
 
 ## Handoff Output
 

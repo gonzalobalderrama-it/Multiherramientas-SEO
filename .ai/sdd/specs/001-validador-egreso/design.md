@@ -1,7 +1,7 @@
 # Design: 001 — Validador de Año de Egreso para Seminario
 
 > Requirements: [.ai/sdd/specs/001-validador-egreso/requirements.md](file:///c:/Users/GonzaloNicolasBalder/OneDrive%20-%20Church%20of%20Jesus%20Christ/Aplicaciones/Multiherramientas%20SEI/.ai/sdd/specs/001-validador-egreso/requirements.md)  
-> Status: Draft  
+> Status: Approved  
 > Last Updated: 2026-10-23  
 
 ---
