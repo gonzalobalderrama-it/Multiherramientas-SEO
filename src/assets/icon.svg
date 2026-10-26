@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Rounded Rect -->
+  <rect width="128" height="128" rx="28" fill="url(#bgGrad)"/>
+  
+  <!-- Graduation Cap (Seminario) -->
+  <path d="M64 26 L108 46 L64 66 L20 46 Z" fill="url(#accentGrad)"/>
+  <path d="M40 56.5 L40 82 C40 94 88 94 88 82 L88 56.5 L64 68.5 Z" fill="#047857"/>
+  
+  <!-- Tassel / Ribbon -->
+  <path d="M30 50.5 L30 78 L26 80 L30 84 L34 80 L30 78" stroke="url(#goldGrad)" stroke-width="3" fill="url(#goldGrad)"/>
+  
+  <!-- Tool Badge (Wrench / Sparkle) -->
+  <circle cx="94" cy="94" r="22" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+  <path d="M94 80 L96 89 L105 89 L98 94 L100 103 L94 97 L88 103 L90 94 L83 89 L92 89 Z" fill="url(#goldGrad)"/>
+</svg>

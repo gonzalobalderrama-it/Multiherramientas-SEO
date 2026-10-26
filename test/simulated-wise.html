@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulated WISE2 — Complete the student profile</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #F8FAFC;
+      color: #0F172A;
+      padding: 40px;
+    }
+    .card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      padding: 32px;
+      border-radius: 12px;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    }
+    h1 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+    p.sub { font-size: 13px; color: #64748B; margin-bottom: 24px; }
+    h2 { font-size: 15px; font-weight: 700; margin: 24px 0 16px 0; border-bottom: 1px solid #E2E8F0; padding-bottom: 8px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    label { font-size: 12px; font-weight: 600; color: #334155; }
+    input, select {
+      padding: 10px 12px;
+      font-size: 14px;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      outline: none;
+    }
+    input:focus, select:focus { border-color: #2563EB; box-shadow: 0 0 0 2px rgba(37,99,235,0.2); }
+    .required-note { font-size: 11px; color: #94A3B8; }
+    .status-box {
+      margin-top: 24px;
+      padding: 12px 16px;
+      background: #EFF6FF;
+      border-left: 4px solid #2563EB;
+      font-size: 13px;
+      color: #1E40AF;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Complete the student profile</h1>
+    <p class="sub">Please complete student profile with the following fields to complete.</p>
+
+    <h2>General Information</h2>
+    <div class="grid">
+      <div class="field">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" value="Sanchez">
+      </div>
+      <div class="field">
+        <label for="birthdate">Birthdate</label>
+        <input type="text" id="birthdate" name="birthdate" value="01/01/2010">
+        <span class="required-note">DD/MM/YYYY</span>
+      </div>
+      <div class="field">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" value="Pepe">
+      </div>
+      <div class="field">
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender">
+          <option value="">--</option>
+          <option value="male" selected>Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+
+    <h2>Registration</h2>
+    <div class="grid">
+      <div class="field">
+        <label for="graduationYear">Graduation Year</label>
+        <select id="graduationYear" name="graduationYear">
+          <option value="">--</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+          <option value="2028">2028</option>
+          <option value="2029">2029</option>
+          <option value="2030">2030</option>
+        </select>
+        <span class="required-note">This is a required field</span>
+      </div>
+      <div class="field">
+        <label for="studentType">Student Type</label>
+        <select id="studentType" name="studentType">
+          <option value="regular" selected>Regular</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="status-box" id="status-box">
+      Página de prueba para verificar captura de fecha (01/01/2010) y selección de Graduation Year desde la extensión Multiherramientas SEI.
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('graduationYear').addEventListener('change', (e) => {
+      document.getElementById('status-box').textContent = '✓ Graduation Year actualizado a: ' + e.target.value;
+      document.getElementById('status-box').style.background = '#ECFDF5';
+      document.getElementById('status-box').style.color = '#065F46';
+      document.getElementById('status-box').style.borderLeftColor = '#059669';
+    });
+  </script>
+</body>
+</html>

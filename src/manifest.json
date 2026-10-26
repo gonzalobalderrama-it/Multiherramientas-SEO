@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Multiherramientas SEI",
+  "version": "1.0.0",
+  "description": "Kit de herramientas y productividad para Asistentes Administrativos de Seminario e Instituto.",
+  "permissions": [
+    "sidePanel",
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_title": "Abrir Multiherramientas SEI",
+    "default_icon": {
+      "16": "assets/icon-16.png",
+      "48": "assets/icon-48.png",
+      "128": "assets/icon-128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "icons": {
+    "16": "assets/icon-16.png",
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  }
+}

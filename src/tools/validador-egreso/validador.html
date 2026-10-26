@@ -1,0 +1,126 @@
+<!-- src/tools/validador-egreso/validador.html -->
+<div class="validador-widget">
+  
+  <!-- Acciones Rápidas de Cabecera -->
+  <div class="widget-header">
+    <div class="widget-title-group">
+      <span class="widget-badge">Seminario</span>
+      <h2 class="widget-title">Validador de Egreso</h2>
+    </div>
+    
+    <button id="btn-wise-capture" class="btn btn-wise" title="Lee la fecha del campo Birthdate en la pestaña activa de WISE2">
+      <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+      </svg>
+      <span>Capturar de WISE</span>
+    </button>
+  </div>
+
+  <!-- Entrada de Fecha -->
+  <div class="form-group">
+    <label for="input-birthdate" class="form-label">
+      <span>Fecha de Nacimiento</span>
+      <span class="label-hint">DD/MM/AAAA</span>
+    </label>
+    
+    <div class="input-wrapper">
+      <input 
+        type="text" 
+        id="input-birthdate" 
+        class="form-input" 
+        placeholder="Ej: 01/01/2010" 
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <input 
+        type="date" 
+        id="input-date-picker" 
+        class="hidden-date-picker" 
+        tabindex="-1"
+      />
+      <button id="btn-open-picker" class="input-action-btn" type="button" title="Abrir selector de calendario">
+        📅
+      </button>
+      <button id="btn-clear-date" class="input-action-btn hidden" type="button" title="Borrar fecha">
+        ✕
+      </button>
+    </div>
+
+    <!-- Banner de ambigüedad de formato -->
+    <div id="ambiguity-banner" class="ambiguity-banner hidden">
+      <span class="ambiguity-text">Detectada fecha ambigua (día y mes $\le 12$).</span>
+      <button id="btn-toggle-format" class="btn-link" type="button">
+        Intercambiar Día/Mes
+      </button>
+    </div>
+  </div>
+
+  <!-- Estado vacío inicial -->
+  <div id="state-empty" class="state-card state-empty">
+    <div class="state-icon">💡</div>
+    <div class="state-content">
+      <h3>Listo para calcular</h3>
+      <p>Ingresa una fecha manualmente o haz clic en <strong>Capturar de WISE</strong> para leer la ficha del alumno en pantalla.</p>
+    </div>
+  </div>
+
+  <!-- Tarjeta de Resultados Dinámica -->
+  <div id="result-container" class="result-wrapper hidden">
+    <div id="result-card" class="result-card">
+      
+      <!-- Bloque Principal de Graduación -->
+      <div class="graduation-highlight">
+        <span class="highlight-label">AÑO DE GRADUACIÓN (WISE2)</span>
+        <div class="highlight-year-row">
+          <span id="display-grad-year" class="grad-year-badge">----</span>
+          
+          <button id="btn-copy-year" class="btn btn-copy" type="button" title="Copiar año al portapapeles">
+            <span id="copy-icon">📋</span>
+            <span id="copy-text">Copiar</span>
+          </button>
+        </div>
+
+        <button id="btn-wise-apply" class="btn btn-apply-wise" type="button">
+          <span>🎯 Aplicar en WISE2</span>
+        </button>
+      </div>
+
+      <!-- Resumen de Cohorte y Estado -->
+      <div class="result-details">
+        <div class="detail-row">
+          <span class="detail-label">Estado de Cursado:</span>
+          <span id="display-status-badge" class="badge-status">Elegible</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Edad Actual:</span>
+          <span id="display-age" class="detail-value">-- años</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Año de Ingreso (14 al 1/Jul):</span>
+          <span id="display-intake" class="detail-value">----</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Cohorte Completa (4 años):</span>
+          <span id="display-cohort" class="detail-value">---- — ----</span>
+        </div>
+        
+        <p id="display-message" class="result-explanation"></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Acordeón de Reglas Oficiales -->
+  <details class="rules-accordion">
+    <summary class="rules-summary">Reglas Oficiales de Seminario (Corte 1 de Julio)</summary>
+    <div class="rules-content">
+      <ul>
+        <li><strong>Corte al 1 de Julio:</strong> El alumno debe tener entre 14 y 17 años al 30 de junio (antes del 1 de julio) del año de ingreso.</li>
+        <li><strong>Ingreso en año + 15:</strong> Si cumple los 14 años del 1 de julio en adelante, ingresa al ciclo lectivo del año siguiente.</li>
+        <li><strong>Límite superior:</strong> Cumplir 18 años antes del 1 de julio del año lectivo supera el límite reglamentario.</li>
+        <li><strong>Duración:</strong> Programa de 4 años lectivos exactos continuos.</li>
+      </ul>
+    </div>
+  </details>
+
+</div>

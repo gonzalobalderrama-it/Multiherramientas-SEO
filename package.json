@@ -1,0 +1,19 @@
+{
+  "name": "multiherramientas-sei",
+  "version": "1.0.0",
+  "description": "Kit de herramientas y productividad para Asistentes Administrativos de Seminario e Instituto.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test src/**/*.test.js",
+    "lint": "node scripts/lint.js"
+  },
+  "keywords": [
+    "chrome-extension",
+    "seminary",
+    "institute",
+    "productivity",
+    "sei"
+  ],
+  "author": "264DevLab / Gonzalo Balderrama",
+  "license": "UNLICENSED"
+}
