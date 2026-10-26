@@ -43,7 +43,7 @@
 
 | ID | Feature | Estado | Requisitos | Diseño | Tareas | Review | Próxima Acción |
 |----|---------|--------|------------|--------|--------|--------|----------------|
-| 001 | 001-validador-egreso | review:done | approved | approved | approved | done | Listo para entrega con `/sdd-gh-push` (o `/sdd-e2e`) |
+| 001 | 001-validador-egreso | review:done | approved | approved | approved | done | Abrir PR hacia develop con `/sdd-gh-pr` |
 
 ## Handoff Output
 
@@ -58,10 +58,11 @@
 
 ## Blocked / Attention Needed
 
-- Ninguno. El feature 001 está en borrador de requisitos esperando aprobación.
+- Ninguno. El feature 001 ha completado la fase de revisión técnica con veredicto Approved.
 
 ## Next Actions
 
-- [ ] Revisar y aprobar requisitos de `001-validador-egreso`
-- [ ] Avanzar al diseño técnico con `/sdd-spec` una vez aprobado
+- [ ] Abrir Pull Request hacia `develop` mediante `/sdd-gh-pr`
+- [ ] Opcional: Validación E2E en navegador mediante `/sdd-e2e`
+- [ ] Revisión por pares y merge hacia `develop` mediante `/sdd-gh-merge`
 
