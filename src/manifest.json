@@ -8,6 +8,13 @@
     "activeTab",
     "scripting"
   ],
+  "host_permissions": [
+    "https://*.churchofjesuschrist.org/*",
+    "https://*.lds.org/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "file:///*"
+  ],
   "action": {
     "default_title": "Abrir Multiherramientas SEI",
     "default_icon": {

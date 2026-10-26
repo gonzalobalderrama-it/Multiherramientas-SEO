@@ -68,19 +68,24 @@ export async function initValidadorEgreso(container) {
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
-      background-color: ${isError ? '#E11D48' : '#059669'};
+      width: calc(100% - 32px);
+      max-width: 320px;
+      box-sizing: border-box;
+      background-color: ${isError ? '#DC2626' : '#059669'};
       color: #FFFFFF;
-      padding: 8px 16px;
-      border-radius: 9999px;
+      padding: 10px 14px;
+      border-radius: 8px;
       font-size: 12px;
+      line-height: 1.4;
+      text-align: center;
       font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
       z-index: 100;
       animation: fadeIn 0.2s ease-out;
     `;
     setTimeout(() => {
       if (toast && toast.parentNode) toast.parentNode.removeChild(toast);
-    }, 2800);
+    }, 4500);
   }
 
   /**
@@ -229,6 +234,11 @@ export async function initValidadorEgreso(container) {
           return;
         }
 
+        if (tab.url && (tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://') || tab.url.startsWith('edge://'))) {
+          showFeedback('No se puede interactuar con páginas internas del navegador.', true);
+          return;
+        }
+
         const results = await chrome.scripting.executeScript({
           target: { tabId: tab.id },
           func: extractWiseBirthdateScript
@@ -243,7 +253,12 @@ export async function initValidadorEgreso(container) {
           showFeedback(res?.error || 'No se localizó la fecha en la página activa.', true);
         }
       } catch (err) {
-        showFeedback('No se pudo acceder a la pestaña: ' + (err.message || 'Permiso denegado'), true);
+        const msg = err.message || '';
+        if (msg.includes('host') || msg.includes('access')) {
+          showFeedback('Permiso requerido: Si estás probando un archivo local, activa "Permitir acceso a URL de archivo" en chrome://extensions. Si estás en WISE, recarga la extensión.', true);
+        } else {
+          showFeedback('No se pudo acceder a la pestaña: ' + msg, true);
+        }
       } finally {
         btnWiseCapture.disabled = false;
         btnWiseCapture.querySelector('span').textContent = originalText;
@@ -272,6 +287,11 @@ export async function initValidadorEgreso(container) {
           return;
         }
 
+        if (tab.url && (tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://') || tab.url.startsWith('edge://'))) {
+          showFeedback('No se puede interactuar con páginas internas del navegador.', true);
+          return;
+        }
+
         const targetYear = currentCalculation.graduationYear;
         const results = await chrome.scripting.executeScript({
           target: { tabId: tab.id },
@@ -291,7 +311,12 @@ export async function initValidadorEgreso(container) {
           btnWiseApply.querySelector('span').textContent = originalText;
         }
       } catch (err) {
-        showFeedback('Error comunicando con WISE2: ' + (err.message || ''), true);
+        const msg = err.message || '';
+        if (msg.includes('host') || msg.includes('access')) {
+          showFeedback('Permiso requerido: Si estás probando un archivo local, activa "Permitir acceso a URL de archivo" en chrome://extensions. Si estás en WISE, recarga la extensión.', true);
+        } else {
+          showFeedback('Error comunicando con WISE2: ' + msg, true);
+        }
         btnWiseApply.querySelector('span').textContent = originalText;
       } finally {
         btnWiseApply.disabled = false;
